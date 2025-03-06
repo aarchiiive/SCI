@@ -3,9 +3,12 @@ from model import Finetunemodel
 
 # 모델 로드 및 GPU 이동
 model = Finetunemodel('weights/easy.pt').cuda()
+# model = Finetunemodel().cuda()
 
-# 입력 데이터 생성 (배치 크기 1, 채널 3, 720x1080 이미지)
-dummy_input = torch.randn(1, 3, 720, 1080).cuda()
+# input_size = (832, 658) # Exdark
+input_size = (900, 1600) # nuImages
+
+dummy_input = torch.randn(1, 3, *input_size).cuda()
 
 # GPU warm-up (초기 오버헤드를 줄이기 위해 10회 실행)
 for _ in range(10):
